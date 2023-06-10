@@ -1,0 +1,108 @@
+body{
+  background-color: #333;
+  margin: 2em;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#root{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.timerDeck{
+  display: flex;
+  height: 100vh;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-content: start;
+}
+
+.timerCard{
+  min-width: 300px;
+  height: 200px;
+  background-color: #F6DDCC;
+  border: 5px solid #EDBB99;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin: 1em;
+}
+
+button{
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #E59866;
+}
+
+.togglePausePlayButton{
+  border: none;
+  margin-bottom: 1em;
+}
+
+.deleteButton{
+  font-family: inherit;
+  font-weight: bolder;
+  font-size:larger;
+}
+
+.topRowButton{
+  width: 10%;
+  margin: 1em 1em 0.5em 1em;
+}
+
+.timerCardTopRowContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.timerCardTitle{
+  margin: 0;
+}
+
+.timer{
+  font-size: large;
+}
+
+.timeInputContainer{
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+  font-size: large;
+}
+
+.timeInputContainer input{
+  font-size: large;
+}
+
+.titleInput{
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2.5em;
+}
+
+input{
+  background: none;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+.inactive{
+  /* background-color: #F2F3F4; */
+  background: none;
+  border-color: #E5E7E9;
+  color: #E5E7E9;
+}
+
+.inactive input{
+  color: inherit;
+}
