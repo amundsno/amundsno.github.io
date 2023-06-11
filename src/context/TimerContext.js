@@ -7,36 +7,41 @@ export const TimerContextProvider = ({ children }) => {
 
     const titleRef = useRef()
 
-    const [timers, setTimers] = useState([
-        {
-            id: "0",
-            title: "Practise React",
-            endTime: new Date().getTime() + 10 * 1000,
-            colorIndex: 0
-        },
-        {
-            id: "1",
-            title: "Go to bed",
-            endTime: new Date().getTime() + ((3 * 60 + 50) * 60 + 30 + 1) * 1000,
-            colorIndex: 1
-        },
-        {
-            id: "2",
-            title: "Go to beach volley",
-            endTime: new Date().getTime() + 12 * 60 * 60 * 1000,
-            colorIndex: 2
-        }
-    ])
+    const loadFromLocalStorage = () => {
+        return JSON.parse(localStorage.getItem('timers')) || []
+    }
 
+    const [timers, setTimers] = useState(loadFromLocalStorage())
+
+    const addToLocalStorage = (timer) => {
+        const storedTimers = loadFromLocalStorage()
+        localStorage.setItem('timers', JSON.stringify([...storedTimers, timer]))
+    }
+
+    const removeFromLocalStorage = (timer) => {
+        const storedTimers = loadFromLocalStorage()
+        localStorage.setItem('timers', JSON.stringify(
+            storedTimers.filter((item) => item.id !== timer.id))
+        )
+    }
+
+    const updateLocalStorage = (timer) => {
+        const storedTimers = loadFromLocalStorage()
+        localStorage.setItem('timers', JSON.stringify(storedTimers.map(
+            (item) => item.id === timer.id ? timer : item
+        )))
+    }
+    
     const getColors = (colorIndex) => {
         return colors[colorIndex % (colors.length)]
-    }
+    }   
 
     return (
         <TimerContext.Provider value={{
             timers, setTimers,
             titleRef,
-            getColors
+            getColors,
+            addToLocalStorage, removeFromLocalStorage, updateLocalStorage
         }} >
             {children}
         </TimerContext.Provider>

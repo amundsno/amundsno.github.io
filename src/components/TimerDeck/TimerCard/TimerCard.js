@@ -7,7 +7,10 @@ import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
 const TimerCard = ({ id }) => {
-    const { timers, setTimers, titleRef, getColors } = useContext(TimerContext)
+    const { 
+        timers, setTimers, titleRef, getColors, 
+        addToLocalStorage, removeFromLocalStorage, updateLocalStorage
+    } = useContext(TimerContext)
 
     const timer = timers.find((timer) => timer.id === id)
 
@@ -25,6 +28,7 @@ const TimerCard = ({ id }) => {
     const handleDelete = () => {
         setTimers(timers.filter((timer) => timer.id !== id))
         titleRef.current.focus()
+        removeFromLocalStorage(timer)
     }
 
     useEffect(() => {
@@ -38,6 +42,7 @@ const TimerCard = ({ id }) => {
         timer.colorIndex++
         setTimers(timers.map((item) => item.id === timer.id ? timer : item))
         setCardColors(getColors(timer.colorIndex))
+        updateLocalStorage(timer)
     }
 
 

@@ -4,7 +4,7 @@ import TitleInput from "./TitleInput"
 import TimeInput from "./TimeInput"
 
 const TimerForm = () => {
-    const { timers, setTimers, titleRef } = useContext(TimerContext)
+    const { timers, setTimers, titleRef, addToLocalStorage } = useContext(TimerContext)
 
     const [title, setTitle] = useState('')
     const [hours, setHours] = useState('')
@@ -27,6 +27,7 @@ const TimerForm = () => {
             colorIndex: timers.length ? timers[timers.length - 1].colorIndex + 1 : 0
         }
         title && setTimers([...timers, newTimer])
+        addToLocalStorage(newTimer)
         setHours('')
         setMinutes('')
         setSeconds('')
