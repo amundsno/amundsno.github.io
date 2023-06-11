@@ -1,4 +1,5 @@
 import { createContext, useState, useRef } from "react";
+import colors from "./colors";
 
 const TimerContext = createContext({})
 
@@ -11,38 +12,31 @@ export const TimerContextProvider = ({ children }) => {
             id: "0",
             title: "Practise React",
             endTime: new Date().getTime() + 10 * 1000,
-            colors: {
-                background: "#F6DDCC",
-                border: "#EDBB99",
-                button: "#E59866"
-            }
+            colorIndex: 0
         },
         {
             id: "1",
             title: "Go to bed",
             endTime: new Date().getTime() + ((3 * 60 + 50) * 60 + 30 + 1) * 1000,
-            colors: {
-                background: "#D6EAF8",
-                border: "#AED6F1",
-                button: "#85C1E9"
-            }
+            colorIndex: 1
         },
         {
             id: "2",
             title: "Go to beach volley",
             endTime: new Date().getTime() + 12 * 60 * 60 * 1000,
-            colors: {
-                background: "#FADBD8",
-                border: "#F5B7B1",
-                button: "#F1948A"
-            }
+            colorIndex: 2
         }
     ])
+
+    const getColors = (colorIndex) => {
+        return colors[colorIndex % (colors.length)]
+    }
 
     return (
         <TimerContext.Provider value={{
             timers, setTimers,
-            titleRef
+            titleRef,
+            getColors
         }} >
             {children}
         </TimerContext.Provider>

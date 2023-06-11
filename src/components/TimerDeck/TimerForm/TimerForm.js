@@ -24,11 +24,7 @@ const TimerForm = () => {
             id: timers.length ? timers[timers.length - 1].id + 1 : 0,
             title,
             endTime: new Date().getTime() + ((hoursInt * 60 + minutesInt) * 60 + secondsInt + 1) * 1000,
-            colors: {
-                background: "#F6DDCC",
-                border: "#EDBB99",
-                button: "#E59866"
-            }
+            colorIndex: timers.length ? timers[timers.length - 1].colorIndex + 1 : 0
         }
         title && setTimers([...timers, newTimer])
         setHours('')

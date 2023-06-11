@@ -7,9 +7,11 @@ import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
 const TimerCard = ({ id }) => {
-    const { timers, setTimers, titleRef } = useContext(TimerContext)
+    const { timers, setTimers, titleRef, getColors } = useContext(TimerContext)
 
     const timer = timers.find((timer) => timer.id === id)
+
+    const cardColors = getColors(timer.colorIndex)
 
     const getRemainingTime = () => {
         const currentTime = new Date().getTime()
@@ -38,9 +40,9 @@ const TimerCard = ({ id }) => {
         <div
             className="timerCard"
             style={{
-                backgroundColor: timer.colors.background,
-                borderColor: timer.colors.border,
-                color: timer.colors.button
+                backgroundColor: cardColors.background,
+                borderColor: cardColors.border,
+                color: cardColors.button
             }}
         >
             <div className='timerCardTopRowContainer'>
