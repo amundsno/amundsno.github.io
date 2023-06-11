@@ -1,21 +1,22 @@
 import ColorCycleButton from './ColorCycleButton'
 import DeleteButton from './DeleteButton'
-
-import { FaPause } from 'react-icons/fa'
+import TogglePausePlayButton from './TogglePausePlayButton'
 
 import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
+import { FaPause, FaPlay } from 'react-icons/fa'
+
 const TimerCard = ({ id }) => {
-    const { 
-        timers, setTimers, titleRef, getColors, 
+    const {
+        timers, setTimers, titleRef, getColors,
         addToLocalStorage, removeFromLocalStorage, updateLocalStorage
     } = useContext(TimerContext)
 
     const timer = timers.find((timer) => timer.id === id)
 
     const getRemainingTime = () => {
-        const currentTime = new Date().getTime()
+        const currentTime = timer.pauseTime > 0 ? timer.pauseTime : new Date().getTime()
         const roundMethod = timer.endTime - currentTime > 0 ? Math.floor : Math.ceil
         const seconds = roundMethod((timer.endTime - currentTime) / 1000)
         const minutes = roundMethod(seconds / 60)
@@ -24,6 +25,7 @@ const TimerCard = ({ id }) => {
     }
 
     const [remainingTime, setRemainingTime] = useState(getRemainingTime())
+    const [isPaused, setIsPaused] = useState(timer.pauseTime > 0)
 
     const handleDelete = () => {
         setTimers(timers.filter((timer) => timer.id !== id))
@@ -33,8 +35,11 @@ const TimerCard = ({ id }) => {
 
     useEffect(() => {
         const interval = setInterval(() => setRemainingTime(getRemainingTime()), 1000)
+        if (isPaused){
+            clearInterval(interval)
+        }
         return () => clearInterval(interval)
-    }, [])
+    }, [isPaused])
 
     const [cardColors, setCardColors] = useState(getColors(timer.colorIndex))
 
@@ -45,6 +50,18 @@ const TimerCard = ({ id }) => {
         updateLocalStorage(timer)
     }
 
+    const handleTogglePausePlay = () => {
+        if (timer.pauseTime === 0) {
+            timer.pauseTime = new Date().getTime()
+            setIsPaused(true)
+        } else {
+            timer.endTime += new Date().getTime() - timer.pauseTime
+            timer.pauseTime = 0
+            setIsPaused(false)
+            setRemainingTime(getRemainingTime())
+        }
+        updateLocalStorage(timer)
+    }
 
     return (
         <div
@@ -63,10 +80,11 @@ const TimerCard = ({ id }) => {
             <p className='timer'>
                 {remainingTime.hours} h : {remainingTime.minutes} m : {remainingTime.seconds} s
             </p>
-            <button className='togglePausePlayButton'>
-                {/* TODO: Repeat button would be nice as well */}
-                <FaPause size={20} />
-            </button>
+            {/* TODO: Restart button would be nice as well */}
+            <TogglePausePlayButton
+                handleTogglePausePlay={handleTogglePausePlay}
+                Icon={isPaused ? FaPlay : FaPause}
+            />
         </div>
     )
 }

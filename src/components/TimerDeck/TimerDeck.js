@@ -10,7 +10,7 @@ const TimerDeck = () => {
 
   return (
     <main className="timerDeck">
-        {timers.length && timers.map((timer) => (
+        {timers.length > 0 && timers.map((timer) => (
             <TimerCard id={timer.id} key={timer.id}/>
         ))}
         

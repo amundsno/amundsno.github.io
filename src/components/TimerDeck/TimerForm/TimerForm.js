@@ -11,7 +11,7 @@ const TimerForm = () => {
     const [minutes, setMinutes] = useState('')
     const [seconds, setSeconds] = useState('')
 
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -20,13 +20,21 @@ const TimerForm = () => {
         const minutesInt = minutes ? parseInt(minutes) : 0
         const secondsInt = seconds ? parseInt(seconds) : 0
 
+        const id = timers.length ? timers[timers.length - 1].id + 1 : 0
+
         const newTimer = {
-            id: timers.length ? timers[timers.length - 1].id + 1 : 0,
-            title,
-            endTime: new Date().getTime() + ((hoursInt * 60 + minutesInt) * 60 + secondsInt + 1) * 1000,
+            id,
+            title: title ? title : `Timer ${id.toString()}`,
+            endTime:
+                new Date().getTime() + 
+                ((hoursInt * 60 + minutesInt) * 60 + secondsInt + (
+                    // If a time is set, add one second to include it in the timer
+                    (hoursInt || minutesInt || secondsInt ? 1 : 0)
+                )) * 1000,
+            pauseTime: 0,
             colorIndex: timers.length ? timers[timers.length - 1].colorIndex + 1 : 0
         }
-        title && setTimers([...timers, newTimer])
+        setTimers([...timers, newTimer])
         addToLocalStorage(newTimer)
         setHours('')
         setMinutes('')
