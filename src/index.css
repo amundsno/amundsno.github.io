@@ -111,3 +111,12 @@ input{
 .inactive input{
   color: inherit;
 }
+
+.instructions{
+  display: block;
+  width: 300px;
+  color: #E5E7E9;
+  font-size:larger;
+  margin-top: 2.4em;
+  line-height: 2.5em;
+}

@@ -1,8 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useRef } from "react";
 
 const TimerContext = createContext({})
 
 export const TimerContextProvider = ({ children }) => {
+
+    const titleRef = useRef()
 
     const [timers, setTimers] = useState([
         {
@@ -18,7 +20,7 @@ export const TimerContextProvider = ({ children }) => {
         {
             id: "1",
             title: "Go to bed",
-            endTime: new Date().getTime() + 2 * 60 * 1000,
+            endTime: new Date().getTime() + ((3 * 60 + 50) * 60 + 30 + 1) * 1000,
             colors: {
                 background: "#D6EAF8",
                 border: "#AED6F1",
@@ -39,7 +41,8 @@ export const TimerContextProvider = ({ children }) => {
 
     return (
         <TimerContext.Provider value={{
-            timers, setTimers
+            timers, setTimers,
+            titleRef
         }} >
             {children}
         </TimerContext.Provider>

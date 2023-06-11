@@ -7,14 +7,16 @@ import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
 const TimerCard = ({ id }) => {
-    const { timers, setTimers } = useContext(TimerContext)
+    const { timers, setTimers, titleRef } = useContext(TimerContext)
 
     const timer = timers.find((timer) => timer.id === id)
 
     const getRemainingTime = () => {
-        const seconds = Math.floor((timer.endTime - new Date().getTime()) / 1000)
-        const minutes = Math.floor(seconds / 60)
-        const hours = Math.floor(minutes / 60)
+        const currentTime = new Date().getTime()
+        const roundMethod = timer.endTime - currentTime > 0 ? Math.floor : Math.ceil
+        const seconds = roundMethod((timer.endTime - currentTime) / 1000)
+        const minutes = roundMethod(seconds / 60)
+        const hours = roundMethod(minutes / 60)
         return { hours: hours % 24, minutes: minutes % 60, seconds: seconds % 60 }
     }
 
@@ -22,6 +24,7 @@ const TimerCard = ({ id }) => {
 
     const handleDelete = () => {
         setTimers(timers.filter((timer) => timer.id !== id))
+        titleRef.current.focus()
     }
 
     useEffect(() => {
@@ -45,17 +48,11 @@ const TimerCard = ({ id }) => {
                 <DeleteButton handleDelete={handleDelete} />
             </div>
             <h2 className="timerCardTitle">{timer.title}</h2>
-            {remainingTime.hours >= 0 &&
-                <p className='timer'>
-                    {remainingTime.hours} h : {remainingTime.minutes} m : {remainingTime.seconds} s
-                </p>
-            }
-            {remainingTime.hours < 0 &&
-                <p className='timer'>
-                    0 h : 0 m : 0 s
-                </p>
-            }
+            <p className='timer'>
+                {remainingTime.hours} h : {remainingTime.minutes} m : {remainingTime.seconds} s
+            </p>
             <button className='togglePausePlayButton'>
+                {/* TODO: Repeat button would be nice as well */}
                 <FaPause size={20} />
             </button>
         </div>

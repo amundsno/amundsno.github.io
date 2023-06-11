@@ -15,6 +15,13 @@ const TimerDeck = () => {
         ))}
         
         <TimerForm />
+        {!timers.length &&
+        <p className="instructions">
+            Give your timer a name, <br />
+            TAB to enter duration, <br />
+            ENTER to start
+        </p>
+        }
       </main>
   )
 }
