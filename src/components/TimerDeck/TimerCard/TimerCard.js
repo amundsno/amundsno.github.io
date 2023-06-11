@@ -11,8 +11,6 @@ const TimerCard = ({ id }) => {
 
     const timer = timers.find((timer) => timer.id === id)
 
-    const cardColors = getColors(timer.colorIndex)
-
     const getRemainingTime = () => {
         const currentTime = new Date().getTime()
         const roundMethod = timer.endTime - currentTime > 0 ? Math.floor : Math.ceil
@@ -34,6 +32,13 @@ const TimerCard = ({ id }) => {
         return () => clearInterval(interval)
     }, [])
 
+    const [cardColors, setCardColors] = useState(getColors(timer.colorIndex))
+
+    const handleNextColor = () => {
+        timer.colorIndex++
+        setTimers(timers.map((item) => item.id === timer.id ? timer : item))
+        setCardColors(getColors(timer.colorIndex))
+    }
 
 
     return (
@@ -46,7 +51,7 @@ const TimerCard = ({ id }) => {
             }}
         >
             <div className='timerCardTopRowContainer'>
-                <ColorCycleButton />
+                <ColorCycleButton handleNextColor={handleNextColor} />
                 <DeleteButton handleDelete={handleDelete} />
             </div>
             <h2 className="timerCardTitle">{timer.title}</h2>

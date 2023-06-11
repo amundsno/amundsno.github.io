@@ -1,8 +1,8 @@
 import { FaPalette } from "react-icons/fa"
 
-const ColorCycleButton = () => {
+const ColorCycleButton = ({ handleNextColor }) => {
     return (
-        <button className='colorCycleButton topRowButton' >
+        <button className='colorCycleButton topRowButton' onClick={handleNextColor} >
             <FaPalette size={20} />
         </button>
     )
