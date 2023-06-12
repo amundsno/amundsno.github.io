@@ -26,6 +26,7 @@ const TimerForm = () => {
         const newTimer = {
             id,
             title: title ? title : `Timer ${id.toString()}`,
+            startTime: new Date().getTime(),
             endTime:
                 new Date().getTime() + 
                 ((hoursInt * 60 + minutesInt) * 60 + secondsInt + (

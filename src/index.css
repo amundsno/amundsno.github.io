@@ -8,14 +8,31 @@
   }
 }
 
-/* Animation utility functions */
-.animate{
-  animation-duration: 0.2s;
+@keyframes buzz {
+  0%, 100%{
+    transform: scale(1) rotate(0);
+  }
+
+  20%, 60%{
+    transform: scale(1.07) rotate(5deg);
+  }
+
+  40%, 80%{
+    transform: scale(1.07) rotate(-5deg);
+  }
 }
 
+/* Animation utility functions */
 .animate.click{
   animation-name: click;
   animation-timing-function: ease-out;
+  animation-duration: 0.2s;
+}
+
+.animate.buzz{
+  animation-name: buzz;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.7s;
 }
 
 body{

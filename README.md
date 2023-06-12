@@ -68,3 +68,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Ideas
+- Make a buzz animation trigger when the timer completes
+- Make the running/paused timer more distinct
+    - Opt 1: Have a brighter color rotate around the border
+    - Opt 2: Dampen the colors of a paused timer? Reduce opacity?
+    - Opt 3: Highlight the countdown itself somehow when paused  
+- Allow for more hours than 24... ALlow for as much time as user wants
+- Sanitize input, only allow integer values

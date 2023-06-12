@@ -15,12 +15,32 @@ const TimerCard = ({ id }) => {
 
     const timer = timers.find((timer) => timer.id === id)
 
+    const [animateBuzz, setAnimateBuzz] = useState(false)
+
+    const handleBuzzAnimation = () => {
+        setAnimateBuzz(true)
+        setTimeout(() => { setAnimateBuzz(false) }, 700)
+    }
+
+    const [isCountdown, setIsCountdown] = useState(
+        timer.startTime !== timer.endTime ? true : false
+    )
+
+    const [isCompleted, setIsCompleted] = useState(false)
+
+    useEffect(() => {
+        if (isCountdown && isCompleted){
+            handleBuzzAnimation()
+        }
+    }, [isCompleted])
+
     const getRemainingTime = () => {
         const currentTime = timer.pauseTime > 0 ? timer.pauseTime : new Date().getTime()
         const roundMethod = timer.endTime - currentTime > 0 ? Math.floor : Math.ceil
         const seconds = roundMethod((timer.endTime - currentTime) / 1000)
         const minutes = roundMethod(seconds / 60)
         const hours = roundMethod(minutes / 60)
+        if (isCountdown && !isCompleted && seconds == 0) setIsCompleted(true)
         return { hours: hours % 24, minutes: minutes % 60, seconds: seconds % 60 }
     }
 
@@ -34,9 +54,9 @@ const TimerCard = ({ id }) => {
     }
 
     useEffect(() => {
-        handleClickAnimation()
+        handleClickAnimation() // Apply the click animation to newly created timers
         const interval = setInterval(() => setRemainingTime(getRemainingTime()), 1000)
-        if (isPaused){
+        if (isPaused) {
             clearInterval(interval)
         }
         return () => clearInterval(interval)
@@ -64,19 +84,19 @@ const TimerCard = ({ id }) => {
         updateLocalStorage(timer)
     }
 
-    const [animate, setAnimate] = useState(false)
+    const [animateClick, setAnimateClick] = useState(false)
 
     const handleClickAnimation = () => {
-        setAnimate(true)
-        setTimeout(() => {
-            setAnimate(false)
-        }, 200)
+        setAnimateClick(true)
+        setTimeout(() => { setAnimateClick(false) }, 200)
     }
+
+
 
     return (
         <div
             // className="timerCard"
-            className={`timerCard ${animate ? 'animate click' : ''}`}
+            className={`timerCard ${animateClick ? 'animate click' : ''} ${animateBuzz ? 'animate buzz' : ''}`}
             style={{
                 backgroundColor: cardColors.background,
                 borderColor: cardColors.border,
@@ -84,7 +104,7 @@ const TimerCard = ({ id }) => {
             }}
         >
             <div className='timerCardTopRowContainer'>
-                <ColorCycleButton handleNextColor={handleNextColor} handleClickAnimation={handleClickAnimation}/>
+                <ColorCycleButton handleNextColor={handleNextColor} handleClickAnimation={handleClickAnimation} />
                 <DeleteButton handleDelete={handleDelete} />
             </div>
             <h2 className="timerCardTitle">{timer.title}</h2>
