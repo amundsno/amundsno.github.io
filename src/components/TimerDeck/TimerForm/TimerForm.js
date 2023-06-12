@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import TimerContext from "../../../context/TimerContext"
 import TitleInput from "./TitleInput"
 import TimeInput from "./TimeInput"
+import { FaCheck, FaPlay, FaPlayCircle } from "react-icons/fa"
 
 const TimerForm = () => {
     const { timers, setTimers, titleRef, addToLocalStorage } = useContext(TimerContext)
@@ -52,7 +53,9 @@ const TimerForm = () => {
                     <TimeInput label={'\xa0m :\xa0'} duration={minutes} setDuration={setMinutes} />
                     <TimeInput label={'\xa0s'} duration={seconds} setDuration={setSeconds} />
                 </div>
-                <input hidden type="submit" />
+                <button style={{color: "#757575"}} type="submit">
+                    <FaPlay size={20} />
+                </button>
             </form>
         </div>
     )

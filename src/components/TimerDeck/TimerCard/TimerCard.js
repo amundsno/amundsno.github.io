@@ -34,6 +34,7 @@ const TimerCard = ({ id }) => {
     }
 
     useEffect(() => {
+        handleClickAnimation()
         const interval = setInterval(() => setRemainingTime(getRemainingTime()), 1000)
         if (isPaused){
             clearInterval(interval)
@@ -63,9 +64,19 @@ const TimerCard = ({ id }) => {
         updateLocalStorage(timer)
     }
 
+    const [animate, setAnimate] = useState(false)
+
+    const handleClickAnimation = () => {
+        setAnimate(true)
+        setTimeout(() => {
+            setAnimate(false)
+        }, 200)
+    }
+
     return (
         <div
-            className="timerCard"
+            // className="timerCard"
+            className={`timerCard ${animate ? 'animate click' : ''}`}
             style={{
                 backgroundColor: cardColors.background,
                 borderColor: cardColors.border,
@@ -73,7 +84,7 @@ const TimerCard = ({ id }) => {
             }}
         >
             <div className='timerCardTopRowContainer'>
-                <ColorCycleButton handleNextColor={handleNextColor} />
+                <ColorCycleButton handleNextColor={handleNextColor} handleClickAnimation={handleClickAnimation}/>
                 <DeleteButton handleDelete={handleDelete} />
             </div>
             <h2 className="timerCardTitle">{timer.title}</h2>
@@ -83,6 +94,7 @@ const TimerCard = ({ id }) => {
             {/* TODO: Restart button would be nice as well */}
             <TogglePausePlayButton
                 handleTogglePausePlay={handleTogglePausePlay}
+                handleClickAnimation={handleClickAnimation}
                 Icon={isPaused ? FaPlay : FaPause}
             />
         </div>

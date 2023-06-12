@@ -1,3 +1,23 @@
+/* Animations */
+@keyframes click {
+  0%, 100%{
+    transform: scale(1)
+  }
+  50%{
+    transform: scale(0.973)
+  }
+}
+
+/* Animation utility functions */
+.animate{
+  animation-duration: 0.2s;
+}
+
+.animate.click{
+  animation-name: click;
+  animation-timing-function: ease-out;
+}
+
 body{
   background-color: #333;
   margin: 2em;
