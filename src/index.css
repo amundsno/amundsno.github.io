@@ -89,12 +89,16 @@ button{
   font-size:larger;
 }
 
-.timerCardTopRowContainer{
+.timerCardControlsContainer{
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 1em 1em 0.5em 1em;
   box-sizing: border-box;
+}
+
+.leftControlsContainer button{
+  margin-right: 0.2em;
 }
 
 

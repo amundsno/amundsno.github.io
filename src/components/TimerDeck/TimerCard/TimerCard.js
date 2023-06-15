@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
 import { FaPause, FaPlay, FaVolumeMute } from 'react-icons/fa'
+import TimerControls from './TimerControls'
 
 const TimerCard = ({ id }) => {
     const {
@@ -70,6 +71,7 @@ const TimerCard = ({ id }) => {
         setTimers(timers.map((item) => item.id === timer.id ? timer : item))
         setCardColors(getColors(timer.colorIndex))
         updateLocalStorage(timer)
+        titleRef.current.focus({ preventScroll: true })
     }
 
     const handleTogglePausePlay = () => {
@@ -82,6 +84,7 @@ const TimerCard = ({ id }) => {
             setIsPaused(false)
             setRemainingTime(getRemainingTime())
         }
+        titleRef.current.focus({ preventScroll: true })
         updateLocalStorage(timer)
     }
 
@@ -90,6 +93,17 @@ const TimerCard = ({ id }) => {
     const handleClickAnimation = () => {
         setAnimateClick(true)
         setTimeout(() => { setAnimateClick(false) }, 200)
+    }
+
+    const [isMuted, setIsMuted] = useState(false)
+
+    const handleToggleMute = () => {
+        // To avoid playing the alarm if the timer is unmuted after completing
+        if (isCompleted) {
+            setIsCompleted(false)
+        }
+        setIsMuted(!isMuted)
+        titleRef.current.focus({ preventScroll: true })
     }
 
 
@@ -103,10 +117,14 @@ const TimerCard = ({ id }) => {
                 color: cardColors.button
             }}
         >
-            <div className='timerCardTopRowContainer'>
-                <ColorCycleButton handleNextColor={handleNextColor} handleClickAnimation={handleClickAnimation} />
-                <DeleteButton handleDelete={handleDelete} />
-            </div>
+            <TimerControls 
+                handleDelete={handleDelete}
+                handleClickAnimation={handleClickAnimation}
+                handleNextColor={handleNextColor}
+                handleToggleMute={handleToggleMute}
+                isMuted={isMuted}
+
+            />
             <h2 className="timerCardTitle">{timer.title}</h2>
             <p className='timer'>
                 {remainingTime.hours} h : {remainingTime.minutes} m : {remainingTime.seconds} s
@@ -117,7 +135,7 @@ const TimerCard = ({ id }) => {
                 handleClickAnimation={handleClickAnimation}
                 Icon={isPaused ? FaPlay : FaPause}
             />
-            {isCompleted &&
+            {isCompleted && !isMuted && 
                 <audio src="timer_beeps.mp3" autoPlay={true}>
                     Your browser does not support the audio element
                 </audio>
