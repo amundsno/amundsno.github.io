@@ -5,7 +5,7 @@ import TogglePausePlayButton from './TogglePausePlayButton'
 import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
-import { FaPause, FaPlay } from 'react-icons/fa'
+import { FaPause, FaPlay, FaVolumeMute } from 'react-icons/fa'
 
 const TimerCard = ({ id }) => {
     const {
@@ -29,7 +29,7 @@ const TimerCard = ({ id }) => {
     const [isCompleted, setIsCompleted] = useState(false)
 
     useEffect(() => {
-        if (isCountdown && isCompleted){
+        if (isCountdown && isCompleted) {
             handleBuzzAnimation()
         }
     }, [isCompleted])
@@ -49,12 +49,13 @@ const TimerCard = ({ id }) => {
 
     const handleDelete = () => {
         setTimers(timers.filter((timer) => timer.id !== id))
-        titleRef.current.focus()
+        titleRef.current.focus({ preventScroll: true })
         removeFromLocalStorage(timer)
     }
 
     useEffect(() => {
         handleClickAnimation() // Apply the click animation to newly created timers
+        titleRef.current.focus() // Keep focus on the input
         const interval = setInterval(() => setRemainingTime(getRemainingTime()), 1000)
         if (isPaused) {
             clearInterval(interval)
@@ -95,7 +96,6 @@ const TimerCard = ({ id }) => {
 
     return (
         <div
-            // className="timerCard"
             className={`timerCard ${animateClick ? 'animate click' : ''} ${animateBuzz ? 'animate buzz' : ''}`}
             style={{
                 backgroundColor: cardColors.background,
@@ -117,6 +117,11 @@ const TimerCard = ({ id }) => {
                 handleClickAnimation={handleClickAnimation}
                 Icon={isPaused ? FaPlay : FaPause}
             />
+            {isCompleted &&
+                <audio src="timer_beeps.mp3" autoPlay={true}>
+                    Your browser does not support the audio element
+                </audio>
+            }
         </div>
     )
 }

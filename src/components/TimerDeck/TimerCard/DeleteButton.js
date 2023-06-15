@@ -1,7 +1,7 @@
 
 const DeleteButton = ({handleDelete}) => {
     return (
-        <button className='deleteButton topRowButton' onClick={handleDelete}>
+        <button className='deleteButton' onClick={handleDelete}>
             X
         </button>
     )

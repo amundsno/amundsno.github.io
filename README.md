@@ -77,3 +77,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     - Opt 3: Highlight the countdown itself somehow when paused  
 - Allow for more hours than 24... ALlow for as much time as user wants
 - Sanitize input, only allow integer values
+
+- Do not scroll to input even though it is focused and ready to type. This is annoying when deleting timers, because the screen will jump down to the input every time
+
+- Add a mute button to each card
+- Restart button that shows when the timer has completed
+
+- Add a top row of functions:
+- Mute/unmute all timers (can just be plain text as well - slightly grayed out and shows only after one has been added)
+- Delete all 
+
+
+Restarte timers
+
+Lagre timers? Lagre presets? Quick start?
+
+- Seems to be autofocusing input when I pause and play - really annoying, must fix
+

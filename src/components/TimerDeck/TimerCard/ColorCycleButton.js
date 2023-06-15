@@ -2,7 +2,7 @@ import { FaPalette } from "react-icons/fa"
 
 const ColorCycleButton = ({ handleNextColor, handleClickAnimation }) => {
     return (
-        <button className='colorCycleButton topRowButton' onClick={() => {
+        <button className='colorCycleButton' onClick={() => {
             handleNextColor()
             handleClickAnimation()
             }} >
