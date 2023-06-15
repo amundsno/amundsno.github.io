@@ -26,7 +26,6 @@ const TimerForm = () => {
 
         const id = timers.length ? timers[timers.length - 1].id + 1 : 0
 
-
         const newTimer = {
             id,
             title: title ? title : `Timer ${id.toString()}`,

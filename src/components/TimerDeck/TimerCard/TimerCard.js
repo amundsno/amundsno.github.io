@@ -1,11 +1,9 @@
-import ColorCycleButton from './ColorCycleButton'
-import DeleteButton from './DeleteButton'
 import TogglePausePlayButton from './TogglePausePlayButton'
 
 import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
-import { FaPause, FaPlay, FaVolumeMute } from 'react-icons/fa'
+import { FaPause, FaPlay } from 'react-icons/fa'
 import TimerControls from './TimerControls'
 
 const TimerCard = ({ id }) => {
@@ -42,7 +40,7 @@ const TimerCard = ({ id }) => {
         const minutes = roundMethod(seconds / 60)
         const hours = roundMethod(minutes / 60)
         if (isCountdown && !isCompleted && seconds == 0) setIsCompleted(true)
-        return { hours: hours % 24, minutes: minutes % 60, seconds: seconds % 60 }
+        return { hours: hours, minutes: minutes % 60, seconds: seconds % 60 }
     }
 
     const [remainingTime, setRemainingTime] = useState(getRemainingTime())
