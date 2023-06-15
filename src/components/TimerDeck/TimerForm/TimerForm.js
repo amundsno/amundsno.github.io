@@ -29,11 +29,7 @@ const TimerForm = () => {
 
         const newTimer = {
             id,
-            title: title
-                ? (title.length < MAX_TITLE_LENGTH
-                    ? title
-                    : title.slice(0, MAX_TITLE_LENGTH - 3) + '...')
-                : `Timer ${id.toString()}`,
+            title: title ? title : `Timer ${id.toString()}`,
             startTime: new Date().getTime(),
             endTime:
                 new Date().getTime() +
@@ -63,8 +59,10 @@ const TimerForm = () => {
                     maxLength={MAX_TITLE_LENGTH}
                 />
                 <div className='timeInputContainer'>
-                    <TimeInput label={'\xa0h :\xa0'} duration={hours} setDuration={setHours} />
-                    <TimeInput label={'\xa0m :\xa0'} duration={minutes} setDuration={setMinutes} />
+                    <TimeInput label={'\xa0h'} duration={hours} setDuration={setHours} />
+                    <p className="inputSeparator">&nbsp;:&nbsp;</p>
+                    <TimeInput label={'\xa0m'} duration={minutes} setDuration={setMinutes} />
+                    <p className="inputSeparator">&nbsp;:&nbsp;</p>
                     <TimeInput label={'\xa0s'} duration={seconds} setDuration={setSeconds} />
                 </div>
                 <button style={{ color: "#757575" }} type="submit">

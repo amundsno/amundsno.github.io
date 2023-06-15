@@ -22,6 +22,20 @@
   }
 }
 
+@keyframes errorShake {
+  0%, 100%{
+    transform: translateX(0);
+  }
+
+  25%, 75%{
+    transform: translateX(3.4px);
+  }
+
+  50%{
+    transform: translateX(-3.4px);
+  }
+}
+
 /* Animation utility functions */
 .animate.click{
   animation-name: click;
@@ -33,6 +47,12 @@
   animation-name: buzz;
   animation-timing-function: ease-in-out;
   animation-duration: 0.7s;
+}
+
+.animate.errorShake{
+  animation-name: errorShake;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
 }
 
 body{
@@ -159,4 +179,8 @@ input{
   color: #E5E7E9;
   font-size:larger;
   line-height: 2.5em;
+}
+
+.inputSeparator{
+  margin: 0;
 }
