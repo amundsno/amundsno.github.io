@@ -34,6 +34,7 @@ const TimerForm = () => {
             startTime: new Date().getTime(),
             endTime: getEndTime(hoursInt, minutesInt, secondsInt),
             pauseTime: 0,
+            isMuted: false,
             originalDuration: {hours: hoursInt, minutes: minutesInt, seconds: secondsInt},
             colorIndex: timers.length ? timers[timers.length - 1].colorIndex + 1 : 0
         }

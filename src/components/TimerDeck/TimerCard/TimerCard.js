@@ -94,7 +94,7 @@ const TimerCard = ({ id }) => {
         setTimeout(() => { setAnimateClick(false) }, 200)
     }
 
-    const [isMuted, setIsMuted] = useState(false)
+    const [isMuted, setIsMuted] = useState(timer.isMuted)
 
     const handleToggleMute = () => {
         // To avoid playing the alarm if the timer is unmuted after completing
@@ -102,6 +102,8 @@ const TimerCard = ({ id }) => {
             setIsCompleted(false)
         }
         setIsMuted(!isMuted)
+        setTimers(timers.map((item) => item.id === timer.id ? {...timer, isMuted: !isMuted} : item))
+        updateLocalStorage({...timer, isMuted: !isMuted})
         titleRef.current.focus({ preventScroll: true })
     }
 
