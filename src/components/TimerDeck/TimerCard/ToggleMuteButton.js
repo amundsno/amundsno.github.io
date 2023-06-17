@@ -1,16 +1,19 @@
-import { FaVolumeMute, FaVolumeUp } from "react-icons/fa"
+import { MdVolumeUp, MdVolumeMute } from "react-icons/md"
+import { useContext } from "react"
+import TimerContext from "../../../context/TimerContext"
 
 const ToggleMuteButton = ({ handleClickAnimation, handleToggleMute, isMuted }) => {
+    const {ICON_SIZE} = useContext(TimerContext)
     return (
         <button onClick={() => {
             handleToggleMute()
             handleClickAnimation()
         }}>
             {!isMuted &&
-                <FaVolumeUp size={20} />
+                <MdVolumeUp size={ICON_SIZE} />
             }
             {isMuted && 
-                <FaVolumeMute size={20} />
+                <MdVolumeMute size={ICON_SIZE} />
             }
         </button>
     )

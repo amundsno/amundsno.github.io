@@ -4,11 +4,12 @@ import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
 import { FaPause, FaPlay } from 'react-icons/fa'
+import { MdPause, MdPlayArrow } from 'react-icons/md'
 import TimerControls from './TimerControls'
 
 const TimerCard = ({ id }) => {
     const {
-        timers, setTimers, titleRef, getColors,
+        timers, setTimers, titleRef, getColors, getEndTime,
         addToLocalStorage, removeFromLocalStorage, updateLocalStorage
     } = useContext(TimerContext)
 
@@ -72,7 +73,7 @@ const TimerCard = ({ id }) => {
         titleRef.current.focus({ preventScroll: true })
     }
 
-    const handleTogglePausePlay = () => {
+    const handleTogglePause = () => {
         if (timer.pauseTime === 0) {
             timer.pauseTime = new Date().getTime()
             setIsPaused(true)
@@ -104,7 +105,23 @@ const TimerCard = ({ id }) => {
         titleRef.current.focus({ preventScroll: true })
     }
 
-
+    const handleRestart = () => {
+        const timeNow = new Date().getTime()
+        const {hours, minutes, seconds } = timer.originalDuration
+        
+        if (isPaused) handleTogglePause()
+        
+        timer.startTime = timeNow
+        if (hours || minutes || seconds) {    
+            timer.endTime = getEndTime(hours, minutes, seconds) - 1
+        } else {
+            timer.endTime = timeNow
+        }
+        
+        setTimers(timers.map((item) => (item.id === timer.id ? timer : item)))
+        setRemainingTime(getRemainingTime())
+        updateLocalStorage(timer)
+    }
 
     return (
         <div
@@ -117,11 +134,11 @@ const TimerCard = ({ id }) => {
         >
             <TimerControls 
                 handleDelete={handleDelete}
+                handleRestart={handleRestart}
                 handleClickAnimation={handleClickAnimation}
                 handleNextColor={handleNextColor}
                 handleToggleMute={handleToggleMute}
                 isMuted={isMuted}
-
             />
             <h2 className="card-title">{timer.title}</h2>
             <p className='duration'>
@@ -129,7 +146,7 @@ const TimerCard = ({ id }) => {
             </p>
             {/* TODO: Restart button would be nice as well */}
             <TogglePauseButton
-                handleTogglePausePlay={handleTogglePausePlay}
+                handleTogglePause={handleTogglePause}
                 handleClickAnimation={handleClickAnimation}
                 Icon={isPaused ? FaPlay : FaPause}
             />

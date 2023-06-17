@@ -72,12 +72,6 @@ input {
   margin-bottom: 1rem;
 }
 
-.delete-btn {
-  font-family: inherit;
-  font-weight: bolder;
-  font-size: larger;
-}
-
 .card-controls-container {
   display: flex;
   justify-content: space-between;

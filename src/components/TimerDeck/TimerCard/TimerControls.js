@@ -1,9 +1,10 @@
 import ColorCycleButton from "./ColorCycleButton"
 import DeleteButton from "./DeleteButton"
+import RestartButton from "./RestartButton"
 import ToggleMuteButton from "./ToggleMuteButton"
 
 const TimerControls = ({
-    handleDelete, handleNextColor, handleClickAnimation, handleToggleMute, isMuted
+    handleDelete, handleRestart, handleNextColor, handleClickAnimation, handleToggleMute, isMuted
 }) => {
     return (
         <div className='card-controls-container'>
@@ -12,13 +13,19 @@ const TimerControls = ({
                     handleNextColor={handleNextColor}
                     handleClickAnimation={handleClickAnimation}
                 />
-                <ToggleMuteButton 
+                <ToggleMuteButton
                     handleToggleMute={handleToggleMute}
                     handleClickAnimation={handleClickAnimation}
                     isMuted={isMuted}
                 />
             </div>
-            <DeleteButton handleDelete={handleDelete} />
+            <div className="right-btns-container">
+                <RestartButton
+                    handleRestart={handleRestart}
+                    handleClickAnimation={handleClickAnimation}
+                />
+                <DeleteButton handleDelete={handleDelete} />
+            </div>
         </div>
     )
 }

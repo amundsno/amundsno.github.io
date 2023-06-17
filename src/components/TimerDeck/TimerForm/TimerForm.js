@@ -2,13 +2,15 @@ import { useContext, useState } from "react"
 import TimerContext from "../../../context/TimerContext"
 import TitleInput from "./TitleInput"
 import TimeInput from "./TimeInput"
-import { FaCheck, FaPlay, FaPlayCircle } from "react-icons/fa"
+import { FaPlay } from "react-icons/fa"
 
 const TimerForm = () => {
 
     const MAX_TITLE_LENGTH = 20
 
-    const { timers, setTimers, titleRef, addToLocalStorage } = useContext(TimerContext)
+    const { 
+        timers, setTimers, titleRef, addToLocalStorage, getEndTime
+    } = useContext(TimerContext)
 
     const [title, setTitle] = useState('')
     const [hours, setHours] = useState('')
@@ -30,13 +32,9 @@ const TimerForm = () => {
             id,
             title: title ? title : `Timer ${id.toString()}`,
             startTime: new Date().getTime(),
-            endTime:
-                new Date().getTime() +
-                ((hoursInt * 60 + minutesInt) * 60 + secondsInt + (
-                    // If a time is set, add one second to include it in the timer
-                    (hoursInt || minutesInt || secondsInt ? 1 : 0)
-                )) * 1000,
+            endTime: getEndTime(hoursInt, minutesInt, secondsInt),
             pauseTime: 0,
+            originalDuration: {hours: hoursInt, minutes: minutesInt, seconds: secondsInt},
             colorIndex: timers.length ? timers[timers.length - 1].colorIndex + 1 : 0
         }
         setTimers([...timers, newTimer])
