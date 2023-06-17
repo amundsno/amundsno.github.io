@@ -1,9 +1,9 @@
-import TimerDeck from "./components/TimerDeck/TimerDeck";
+import TimerCollection from "./components/TimerCollection/TimerCollection";
 
 function App() {
   return (
     <div className="App">
-      <TimerDeck />      
+      <TimerCollection />      
     </div>
   );
 }

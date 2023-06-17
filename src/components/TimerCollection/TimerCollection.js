@@ -4,7 +4,7 @@ import TimerForm from "./TimerForm/TimerForm"
 
 import { useContext } from "react"
 
-const TimerDeck = () => {
+const TimerCollection = () => {
 
     const {timers, setTimers} = useContext(TimerContext)
 
@@ -26,4 +26,4 @@ const TimerDeck = () => {
   )
 }
 
-export default TimerDeck
+export default TimerCollection
