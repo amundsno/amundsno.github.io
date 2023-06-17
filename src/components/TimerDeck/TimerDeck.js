@@ -9,7 +9,7 @@ const TimerDeck = () => {
     const {timers, setTimers} = useContext(TimerContext)
 
   return (
-    <main className="timerDeck">
+    <main className="timer-deck">
         {timers.length > 0 && timers.map((timer) => (
             <TimerCard id={timer.id} key={timer.id}/>
         ))}

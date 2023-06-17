@@ -1,75 +1,35 @@
-/* Animations */
-@keyframes click {
-  0%, 100%{
-    transform: scale(1)
-  }
-  50%{
-    transform: scale(0.973)
-  }
+:root {
+  --card-inner-width: 300px;
+  --card-border-width: 5px;
+  --card-margin: 16px;
+  --card-total-width: 342px;
+  --color-white: #E5E7E9;
 }
 
-@keyframes buzz {
-  0%, 100%{
-    transform: scale(1) rotate(0);
-  }
-
-  20%, 60%{
-    transform: scale(1.07) rotate(5deg);
-  }
-
-  40%, 80%{
-    transform: scale(1.07) rotate(-5deg);
-  }
-}
-
-@keyframes errorShake {
-  0%, 100%{
-    transform: translateX(0);
-  }
-
-  25%, 75%{
-    transform: translateX(3.4px);
-  }
-
-  50%{
-    transform: translateX(-3.4px);
-  }
-}
-
-/* Animation utility functions */
-.animate.click{
-  animation-name: click;
-  animation-timing-function: ease-out;
-  animation-duration: 0.2s;
-}
-
-.animate.buzz{
-  animation-name: buzz;
-  animation-timing-function: ease-in-out;
-  animation-duration: 0.7s;
-}
-
-.animate.errorShake{
-  animation-name: errorShake;
-  animation-duration: 0.3s;
-  animation-timing-function: ease-out;
-}
-
-body{
-  background-color: #333;
-  margin: 2em;
-  padding: 0;
+body {
+  font-size: 16px;
   font-family: 'Courier New', Courier, monospace;
+  background-color: #333;
+
+  /* Three or more columns - left aligned */
+  margin: 1rem 0 0 1rem;
 }
 
-#root{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+/* Two columns - centered */
+@media (max-width: 1041px) {
+  body {
+    margin-left: calc(50vw - var(--card-total-width))
+  }
 }
 
-.timerDeck{
+/* One column - centered */
+@media (max-width: 683px) {
+  body {
+    margin-left: calc(50vw - var(--card-total-width) / 2)
+  }
+}
+
+.timer-deck {
   display: flex;
   height: 100vh;
   flex-wrap: wrap;
@@ -77,39 +37,48 @@ body{
   align-content: start;
 }
 
-.timerCard{
-  min-width: 300px;
+.timer-card {
   height: 200px;
-  background-color: #F6DDCC;
-  border: 5px solid #EDBB99;
-  border-radius: 15px;
+  min-width: var(--card-inner-width);
+  margin: var(--card-margin);
+  border: var(--card-border-width) solid var(--color-white);
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  margin: 1em;
 }
 
-button{
+/* Buttons */
+
+button,
+input {
   background: none;
   border: none;
-  cursor: pointer;
   color: inherit;
 }
 
-.togglePausePlayButton{
-  border: none;
-  margin-bottom: 1em;
+button {
+  cursor: pointer;
 }
 
-.deleteButton{
+input {
+  outline: none;
+  font-family: inherit;
+}
+
+.toggle-pause-btn {
+  margin-bottom: 1rem;
+}
+
+.delete-btn {
   font-family: inherit;
   font-weight: bolder;
-  font-size:larger;
+  font-size: larger;
 }
 
-.timerCardControlsContainer{
+.card-controls-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -117,70 +86,55 @@ button{
   box-sizing: border-box;
 }
 
-.leftControlsContainer button{
-  margin-right: 0.2em;
+.left-btns-container button {
+  margin-right: 0.2rem;
 }
 
+/* Text */
 
-.timerCardTitle{
+.card-title {
   margin: 0;
 }
 
-.timer{
-  font-size: large;
+.duration,
+.duration-input-container input,
+label {
+  font-size: 1.1rem;
 }
 
-.timerCardTitle, .timer {
+.card-title,
+.duration {
   color: black;
 }
 
-.timeInputContainer{
+.duration-input-container {
+  margin: 25px 0;
   display: flex;
   justify-content: center;
-  margin: 25px 0;
-  font-size: large;
 }
 
-.timeInputContainer input{
-  font-size: large;
-}
-
-.titleInput{
-  font-size: 1.5em;
+.title-input {
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   margin-top: 2.5em;
 }
 
-input{
-  background: none;
-  border: none;
-  outline: none;
-  font-family: inherit;
+.form,
+.instructions {
+  color: var(--color-white);
 }
 
-.inactive{
-  /* background-color: #F2F3F4; */
-  background: none;
-  border-color: #E5E7E9;
-  color: #E5E7E9;
-}
-
-.inactive input{
-  color: inherit;
-}
-
-.instructions{
+.instructions {
   display: grid;
   place-content: center;
   text-align: center;
-  min-width: 300px;
-  margin: 1em;
-  color: #E5E7E9;
-  font-size:larger;
+  min-width: var(--card-inner-width);
+  margin: var(--card-margin);
+  font-size: 1.2rem;
   line-height: 2.5em;
 }
 
-.inputSeparator{
+.duration-input-sep {
   margin: 0;
 }

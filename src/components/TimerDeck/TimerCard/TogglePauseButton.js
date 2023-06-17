@@ -1,8 +1,8 @@
 
-const TogglePausePlayButton = ({ handleTogglePausePlay, Icon, handleClickAnimation }) => {
+const TogglePauseButton = ({ handleTogglePausePlay, Icon, handleClickAnimation }) => {
     return (
         <button
-            className='togglePausePlayButton'
+            className='toggle-pause-btn'
             onClick={() => {handleTogglePausePlay(); handleClickAnimation();}}
         >
             <Icon size={20} />
@@ -10,4 +10,4 @@ const TogglePausePlayButton = ({ handleTogglePausePlay, Icon, handleClickAnimati
     )
 }
 
-export default TogglePausePlayButton
+export default TogglePauseButton

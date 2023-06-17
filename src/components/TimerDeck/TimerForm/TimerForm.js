@@ -49,7 +49,7 @@ const TimerForm = () => {
     }
 
     return (
-        <div className="timerCard inactive">
+        <div className="timer-card form">
             <form onSubmit={handleSubmit}>
                 <TitleInput
                     title={title}
@@ -57,11 +57,11 @@ const TimerForm = () => {
                     titleRef={titleRef}
                     maxLength={MAX_TITLE_LENGTH}
                 />
-                <div className='timeInputContainer'>
+                <div className='duration-input-container'>
                     <TimeInput label={'\xa0h'} duration={hours} setDuration={setHours} />
-                    <p className="inputSeparator">&nbsp;:&nbsp;</p>
+                    <p className="duration-input-sep">&nbsp;:&nbsp;</p>
                     <TimeInput label={'\xa0m'} duration={minutes} setDuration={setMinutes} />
-                    <p className="inputSeparator">&nbsp;:&nbsp;</p>
+                    <p className="duration-input-sep">&nbsp;:&nbsp;</p>
                     <TimeInput label={'\xa0s'} duration={seconds} setDuration={setSeconds} />
                 </div>
                 <button style={{ color: "#757575" }} type="submit">

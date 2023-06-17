@@ -1,4 +1,4 @@
-import TogglePausePlayButton from './TogglePausePlayButton'
+import TogglePauseButton from './TogglePauseButton'
 
 import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
@@ -108,7 +108,7 @@ const TimerCard = ({ id }) => {
 
     return (
         <div
-            className={`timerCard ${animateClick ? 'animate click' : ''} ${animateBuzz ? 'animate buzz' : ''}`}
+            className={`timer-card ${animateClick ? 'animate click' : ''} ${animateBuzz ? 'animate buzz' : ''}`}
             style={{
                 backgroundColor: cardColors.background,
                 borderColor: cardColors.border,
@@ -123,12 +123,12 @@ const TimerCard = ({ id }) => {
                 isMuted={isMuted}
 
             />
-            <h2 className="timerCardTitle">{timer.title}</h2>
-            <p className='timer'>
+            <h2 className="card-title">{timer.title}</h2>
+            <p className='duration'>
                 {remainingTime.hours} h : {remainingTime.minutes} m : {remainingTime.seconds} s
             </p>
             {/* TODO: Restart button would be nice as well */}
-            <TogglePausePlayButton
+            <TogglePauseButton
                 handleTogglePausePlay={handleTogglePausePlay}
                 handleClickAnimation={handleClickAnimation}
                 Icon={isPaused ? FaPlay : FaPause}

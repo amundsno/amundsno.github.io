@@ -10,7 +10,8 @@ const TimeInput = ({ duration, setDuration, label }) => {
 
     const handleInputOnChange = (e) => {
         const inputValue = e.target.value
-        if(!isNaN(inputValue) && !inputValue.includes('.') && !inputValue.includes(' ')){
+        const regExpPattern = /^[0-9]*$/
+        if(regExpPattern.test(inputValue)){
             setDuration(inputValue)
         } else {
             triggerErrorShakeAnimation()

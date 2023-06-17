@@ -6,8 +6,8 @@ const TimerControls = ({
     handleDelete, handleNextColor, handleClickAnimation, handleToggleMute, isMuted
 }) => {
     return (
-        <div className='timerCardControlsContainer'>
-            <div className="leftControlsContainer">
+        <div className='card-controls-container'>
+            <div className="left-btns-container">
                 <ColorCycleButton
                     handleNextColor={handleNextColor}
                     handleClickAnimation={handleClickAnimation}

@@ -1,0 +1,57 @@
+/* Click and new card animation */
+@keyframes click {
+0%, 100%{
+    transform: scale(1)
+}
+50%{
+    transform: scale(0.973)
+}
+}
+
+.animate.click{
+    animation-name: click;
+    animation-timing-function: ease-out;
+    animation-duration: 0.2s;
+}
+
+/* Timer finished animation */
+@keyframes buzz {
+0%, 100%{
+    transform: scale(1) rotate(0);
+}
+
+20%, 60%{
+    transform: scale(1.07) rotate(5deg);
+}
+
+40%, 80%{
+    transform: scale(1.07) rotate(-5deg);
+}
+}
+
+.animate.buzz{
+    animation-name: buzz;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.7s;
+}
+
+/* Input error shake animation */
+@keyframes errorShake {
+0%, 100%{
+    transform: translateX(0);
+}
+
+25%, 75%{
+    transform: translateX(3.4px);
+}
+
+50%{
+    transform: translateX(-3.4px);
+}
+}
+
+.animate.errorShake{
+animation-name: errorShake;
+animation-duration: 0.3s;
+animation-timing-function: ease-out;
+}

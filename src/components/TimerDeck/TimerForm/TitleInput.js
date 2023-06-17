@@ -5,7 +5,7 @@ const TitleInput = ({ title, setTitle, titleRef, maxLength }) => {
         <input
             autoFocus={true}
             maxLength={maxLength}
-            className='titleInput'
+            className='title-input'
             name="timerTitle"
             type='text'
             placeholder='Timer Name'
