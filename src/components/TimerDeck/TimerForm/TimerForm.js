@@ -9,7 +9,7 @@ const TimerForm = () => {
     const MAX_TITLE_LENGTH = 20
 
     const { 
-        timers, setTimers, titleRef, addToLocalStorage, getEndTime
+        timers, titleRef, addTimer, getEndTime
     } = useContext(TimerContext)
 
     const [title, setTitle] = useState('')
@@ -38,8 +38,7 @@ const TimerForm = () => {
             originalDuration: {hours: hoursInt, minutes: minutesInt, seconds: secondsInt},
             colorIndex: timers.length ? timers[timers.length - 1].colorIndex + 1 : 0
         }
-        setTimers([...timers, newTimer])
-        addToLocalStorage(newTimer)
+        addTimer(newTimer)
         setHours('')
         setMinutes('')
         setSeconds('')

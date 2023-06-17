@@ -4,13 +4,12 @@ import { useContext, useEffect, useState } from 'react'
 import TimerContext from '../../../context/TimerContext'
 
 import { FaPause, FaPlay } from 'react-icons/fa'
-import { MdPause, MdPlayArrow } from 'react-icons/md'
 import TimerControls from './TimerControls'
 
 const TimerCard = ({ id }) => {
     const {
-        timers, setTimers, titleRef, getColors, getEndTime,
-        addToLocalStorage, removeFromLocalStorage, updateLocalStorage
+        timers, titleRef, getColors, getEndTime,
+        deleteTimer, updateTimer
     } = useContext(TimerContext)
 
     const timer = timers.find((timer) => timer.id === id)
@@ -48,9 +47,8 @@ const TimerCard = ({ id }) => {
     const [isPaused, setIsPaused] = useState(timer.pauseTime > 0)
 
     const handleDelete = () => {
-        setTimers(timers.filter((timer) => timer.id !== id))
+        deleteTimer(timer.id)
         titleRef.current.focus({ preventScroll: true })
-        removeFromLocalStorage(timer)
     }
 
     useEffect(() => {
@@ -67,9 +65,8 @@ const TimerCard = ({ id }) => {
 
     const handleNextColor = () => {
         timer.colorIndex++
-        setTimers(timers.map((item) => item.id === timer.id ? timer : item))
+        updateTimer(timer)
         setCardColors(getColors(timer.colorIndex))
-        updateLocalStorage(timer)
         titleRef.current.focus({ preventScroll: true })
     }
 
@@ -84,7 +81,7 @@ const TimerCard = ({ id }) => {
             setRemainingTime(getRemainingTime())
         }
         titleRef.current.focus({ preventScroll: true })
-        updateLocalStorage(timer)
+        updateTimer(timer)
     }
 
     const [animateClick, setAnimateClick] = useState(false)
@@ -102,8 +99,8 @@ const TimerCard = ({ id }) => {
             setIsCompleted(false)
         }
         setIsMuted(!isMuted)
-        setTimers(timers.map((item) => item.id === timer.id ? {...timer, isMuted: !isMuted} : item))
-        updateLocalStorage({...timer, isMuted: !isMuted})
+        timer.isMuted = !timer.isMuted
+        updateTimer(timer)
         titleRef.current.focus({ preventScroll: true })
     }
 
@@ -120,9 +117,8 @@ const TimerCard = ({ id }) => {
             timer.endTime = timeNow
         }
         
-        setTimers(timers.map((item) => (item.id === timer.id ? timer : item)))
+        updateTimer(timer)
         setRemainingTime(getRemainingTime())
-        updateLocalStorage(timer)
     }
 
     return (

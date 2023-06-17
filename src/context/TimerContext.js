@@ -15,23 +15,24 @@ export const TimerContextProvider = ({ children }) => {
 
     const [timers, setTimers] = useState(loadFromLocalStorage())
 
-    const addToLocalStorage = (timer) => {
-        const storedTimers = loadFromLocalStorage()
-        localStorage.setItem('timers', JSON.stringify([...storedTimers, timer]))
+    const setAndSaveTimers = (timerList) => {
+        setTimers(timerList)
+        localStorage.setItem('timers', JSON.stringify(timerList))
     }
 
-    const removeFromLocalStorage = (timer) => {
-        const storedTimers = loadFromLocalStorage()
-        localStorage.setItem('timers', JSON.stringify(
-            storedTimers.filter((item) => item.id !== timer.id))
-        )
+    const addTimer = (newTimer) => {
+        const newTimers = [...timers, newTimer]
+        setAndSaveTimers(newTimers)
     }
 
-    const updateLocalStorage = (timer) => {
-        const storedTimers = loadFromLocalStorage()
-        localStorage.setItem('timers', JSON.stringify(storedTimers.map(
-            (item) => item.id === timer.id ? timer : item
-        )))
+    const deleteTimer = (id) => {
+        const newTimers = timers.filter((timer) => timer.id !== id)
+        setAndSaveTimers(newTimers)
+    }
+
+    const updateTimer = (timer) => {
+        const newTimers = timers.map((item) => item.id === timer.id ? timer : item)
+        setAndSaveTimers(newTimers)
     }
 
     const getColors = (colorIndex) => {
@@ -53,7 +54,7 @@ export const TimerContextProvider = ({ children }) => {
             timers, setTimers,
             titleRef,
             getColors,
-            addToLocalStorage, removeFromLocalStorage, updateLocalStorage
+            addTimer, deleteTimer, updateTimer
         }} >
             {children}
         </TimerContext.Provider>
