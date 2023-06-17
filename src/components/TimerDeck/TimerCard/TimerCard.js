@@ -30,6 +30,18 @@ const TimerCard = ({ id }) => {
     useEffect(() => {
         if (isCountdown && isCompleted) {
             handleBuzzAnimation()
+            const previousTitle = document.title
+            document.title = `${timer.title} completed!`
+            
+            const favicon = document.getElementById('favicon')
+            const previousFavicon = favicon.getAttribute('href')
+            favicon.setAttribute('href', '/alarm-favicon.ico')
+
+            setTimeout(() => {
+                document.title = previousTitle
+                favicon.setAttribute('href', previousFavicon)
+            }, 5000)
+            
         }
     }, [isCompleted])
 
