@@ -11,7 +11,7 @@ const TimeInput = ({ duration, setDuration, label }) => {
     const handleInputOnChange = (e) => {
         const inputValue = e.target.value
         const regExpPattern = /^[0-9]*$/
-        if(regExpPattern.test(inputValue)){
+        if(regExpPattern.test(inputValue) && inputValue.length < 12){
             setDuration(inputValue)
         } else {
             triggerErrorShakeAnimation()

@@ -71,26 +71,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # Ideas
 
-- Make the running/paused timer more distinct
-    - Opt 1: Have a brighter color rotate around the border
-    - Opt 2: Dampen the colors of a paused timer? Reduce opacity?
-    - Opt 3: Highlight the countdown itself somehow when paused  
-
-- Do not scroll to input even though it is focused and ready to type. This is annoying when deleting timers, because the screen will jump down to the input every time
-
-- Restart button that shows when the timer has completed
 
 - Add a top row of functions:
 - Mute/unmute all timers (can just be plain text as well - slightly grayed out and shows only after one has been added)
 - Delete all 
 
 
-Restarte timers
-
-Lagre timers? Lagre presets? Quick start?
-
-- Seems to be autofocusing input when I pause and play - really annoying, must fix
-
-- Wait with displaying the buzz animation until the page is in focus (in view) in case a timer completed while the tab was not open. It will make it easier to see which timer completed.
+Lagre timers? Lagre presets? Quick start
 
 - Set a maximum number of hours to not break the card design?
