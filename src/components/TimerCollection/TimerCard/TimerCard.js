@@ -125,6 +125,7 @@ const TimerCard = ({ id }) => {
         timer.startTime = timeNow
         if (hours || minutes || seconds) {    
             timer.endTime = getEndTime(hours, minutes, seconds) - 1
+            setIsCompleted(false)
         } else {
             timer.endTime = timeNow
         }
