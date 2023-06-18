@@ -8,7 +8,7 @@
     "react-icons": "^4.9.0",
     "react-scripts": "5.0.1"
   },
-  "homepage": "https://amundsno.github.io/timer-collection",
+  "homepage": "https://amundsno.github.io",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
